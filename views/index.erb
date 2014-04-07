@@ -34,7 +34,7 @@
     <h4>Image</h4>
 <% 
 href = @data.css('#selectedcontent li a').map{ |link| link['href'] }
-    Array(href)[0 .. 10].each do |image| 
+    Array(href).each do |image| 
      images = Nokogiri::HTML(open(image))
      @img = images.css('#left-stack .artwork img.artwork')[0]["src"] 
      puts @img
