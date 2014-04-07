@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <style>
+      li{
+        list-style-type: none;
+      }
+    </style>
+</head>
+<body>
+    <% @itunes = @data.css('#selectedcontent li a').map{ |link| link.text.strip}
+       @hrefs= @data.css('#selectedcontent li a').map{ |link| link['href']}
+
+
+      %>
+
+    <div class="row">
+    <div class="col-md-4">
+    <h4>Title</h4>
+    <% @itunes.each do |title| %>
+      <li><%= title %></li>
+    <% end %>
+</div>
+<div class="col-md-4">
+    <h4>Link</h4>
+    <% @hrefs.each do |href| %>
+      <li><%= href %></li>
+    <% end %>
+</div>
+
+<div class="col-md-4">
+    <h4>Image</h4>
+<% 
+href = @data.css('#selectedcontent li a').map{ |link| link['href'] }
+    Array(href)[0 .. 10].each do |image| 
+     images = Nokogiri::HTML(open(image))
+     @img = images.css('#left-stack .artwork img.artwork')[0]["src"] 
+     puts @img
+     %>
+  
+  <% Array(@img).each do |photo| %>
+  <li><%= photo %></li>
+<% end %>
+<% end %>
+  
+
+
+   
+</div>
+</div>
+</body>
+</html>
+
