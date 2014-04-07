@@ -8,5 +8,5 @@ require "./app"
 Bundler.require
 
 use Rack::Timeout 
-Rack::Timeout.overtime = 5010
+Rack::Timeout.timeout = 500
 run Sinatra::Application
